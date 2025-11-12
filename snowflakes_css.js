@@ -1,6 +1,7 @@
 // Create minimized version with https://minify-js.com
 
 // Adjustable variables
+window.SNOWFLAKE_SET_DATE = false; // Enable time range
 window.SNOWFLAKE_START_DATE = 12.22; // Included
 window.SNOWFLAKE_END_DATE = 12.26; // Excluded
 window.SNOWFLAKE_SPEED = 1; // Speed of snowflakes
