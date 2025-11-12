@@ -41,13 +41,15 @@ const spawn_snowflake = () => {
 
 const main = () => {
     // Interupt program if date does not match
-    if (window.SNOWFLAKE_START_DATE < window.SNOWFLAKE_END_DATE) {
-        if (!(window.SNOWFLAKE_START_DATE < current_date_number && current_date_number < window.SNOWFLAKE_END_DATE)) {
-            return;
-        }
-    } else {
-        if (window.SNOWFLAKE_END_DATE < current_date_number && current_date_number < window.SNOWFLAKE_START_DATE) {
-            return;
+    if (window.SNOWFLAKE_SET_DATE) {
+        if (window.SNOWFLAKE_START_DATE < window.SNOWFLAKE_END_DATE) {
+            if (!(window.SNOWFLAKE_START_DATE < current_date_number && current_date_number < window.SNOWFLAKE_END_DATE)) {
+                return;
+            }
+        } else {
+            if (window.SNOWFLAKE_END_DATE < current_date_number && current_date_number < window.SNOWFLAKE_START_DATE) {
+                return;
+            }
         }
     }
 

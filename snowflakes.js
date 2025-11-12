@@ -1,6 +1,7 @@
 // Create minimized version with https://minify-js.com
 
 // Adjustable variables
+window.SNOWFLAKE_SET_DATE = false; // Enable time range
 window.SNOWFLAKE_START_DATE = 12.22; // Included
 window.SNOWFLAKE_END_DATE = 12.26; // Excluded
 window.SNOWFLAKE_SPEED = 1; // Speed of snowflakes
@@ -42,11 +43,11 @@ class SnowFlake {
             shadow_string =  `text-shadow: 0 0 1px ${window.SNOWFLAKE_SHADOW_COLOR};`;
         }
         this.div.innerHTML += `<p style='color:${snowflake_color};font-size:${snowflake_size}px;${shadow_string}'>${snowflake_symbol}</p>`;
-        
+
         container.appendChild(this.div);
         snowflakes.push(this);
     }
-  	update(delta_time, time) {
+        update(delta_time, time) {
     	this.y += delta_time * this.v;
         this.a += delta_time * this.va;
         let rotation = `rotate(${this.a}deg)`;
@@ -91,7 +92,7 @@ const update = (time) => {
     for (i = snowflakes.length - 1; i >= 0; i--) {
         snowflakes[i].update(delta_time, time);
     }
-    
+
     window.requestAnimationFrame(update);
 }
 
@@ -105,17 +106,19 @@ var screen_height = 0;
 
 const main = () => {
     // Interupt program if date does not match
-    if (window.SNOWFLAKE_START_DATE < window.SNOWFLAKE_END_DATE) {
-        if (!(window.SNOWFLAKE_START_DATE < current_date_number && current_date_number < window.SNOWFLAKE_END_DATE)) {
-            return;
-        }
-    } else {
-        if (window.SNOWFLAKE_END_DATE < current_date_number && current_date_number < window.SNOWFLAKE_START_DATE) {
-            return;
+    if (window.SNOWFLAKE_SET_DATE) {
+        if (window.SNOWFLAKE_START_DATE < window.SNOWFLAKE_END_DATE) {
+            if (!(window.SNOWFLAKE_START_DATE < current_date_number && current_date_number < window.SNOWFLAKE_END_DATE)) {
+                return;
+            }
+        } else {
+            if (window.SNOWFLAKE_END_DATE < current_date_number && current_date_number < window.SNOWFLAKE_START_DATE) {
+                return;
+            }
         }
     }
-    
-    container = document.createElement("div");  
+
+    container = document.createElement("div");
     container.style.cssText = `
             position: fixed;
             overflow: hidden;
